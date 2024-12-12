@@ -2,91 +2,78 @@ import hashlib
 import numpy as np
 import random
 
-# Count-Min Sketch class
 class CountMinSketch:
     def __init__(self, width, depth):
-        """
-        Initialize a Count-Min Sketch with specified width and depth.
-
-        - width: The width of the sketch (number of columns).
-        - depth: The depth of the sketch (number of hash functions).
-        """
         self.width = width
         self.depth = depth
-        # Initialize the CMS table (2D array)
+   
         self.table = np.zeros((depth, width), dtype=int)
+        self.total_count = 0  # Track total events
 
     def hash(self, item, i):
-        """
-        Generate a hash for an item using a specific hash function (indexed by i).
-        """
         return int(hashlib.md5(f"{item}{i}".encode('utf-8')).hexdigest(), 16) % self.width
 
     def add(self, item):
-        """
-        Add an item to the CMS table by hashing it and incrementing the corresponding cells.
-        """
         for i in range(self.depth):
-            # Compute hash and increment the corresponding counter in the table
             hash_value = self.hash(item, i)
             self.table[i][hash_value] += 1
+        self.total_count += 1
 
     def estimate(self, item):
-        """
-        Estimate the frequency of an item in the CMS table.
-        """
-        estimates = []
-        for i in range(self.depth):
-            hash_value = self.hash(item, i)
-            estimates.append(self.table[i][hash_value])
 
-        # Return the minimum count (approximation)
+        estimates = [self.table[i][self.hash(item, i)] for i in range(self.depth)]
         return min(estimates)
 
-# Function to simulate event stream
+    def merge(self, other):
+    
+        if self.width != other.width or self.depth != other.depth:
+            raise ValueError("Dimensions of Count-Min Sketches must match for merging.")
+        
+        self.table += other.table
+        self.total_count += other.total_count
+
+    def calculate_error_margin(self):
+        return self.total_count / self.width
+
 def generate_random_events(num_events):
     events = []
     for _ in range(num_events):
-        # Simulating random event generation
         events.append(random.choice(['login', 'logout', 'purchase', 'view', 'share', 'click']))
     return events
 
-# Initialize CMS with width 1000 and depth 10
-cms = CountMinSketch(width=1000, depth=10)
-
-# Generate a million events (simulate an event stream)
-events = generate_random_events(1000000)
-
-# Add events to CMS
-for event in events:
-    cms.add(event)
-
-# Get frequency estimates for each event
-unique_events = set(events)
-event_frequencies = {}
-for event in unique_events:
-    event_frequencies[event] = cms.estimate(event)
-
-print("Estimated Event Frequencies:")
-print(event_frequencies)
-
-# Step 2: Calculate Percentiles (90th Percentile, Median)
-# Get the frequencies of all events
-frequencies = list(event_frequencies.values())
-
-# Sort the frequencies to compute percentiles
-frequencies.sort()
-
 def calculate_percentile(percentile, data):
-    """
-    Calculate the specified percentile from sorted data.
-    """
     index = int(np.ceil((percentile / 100) * len(data))) - 1
     return data[index]
 
-# Calculate 90th percentile and median
-percentile_90 = calculate_percentile(90, frequencies)
-median = calculate_percentile(50, frequencies)
+# Main function to demonstrate functionality
+if __name__ == "__main__":
 
-print(f"90th Percentile Frequency: {percentile_90}")
-print(f"Median Frequency: {median}")
+    cms1 = CountMinSketch(width=10000, depth=10)  # Larger width for reduced error margin
+    cms2 = CountMinSketch(width=10000, depth=10)
+
+    events1 = generate_random_events(500000)
+    events2 = generate_random_events(500000)
+
+    for event in events1:
+        cms1.add(event)
+
+    for event in events2:
+        cms2.add(event)
+
+    cms1.merge(cms2)
+
+    unique_events = set(events1 + events2)
+    event_frequencies = {event: cms1.estimate(event) for event in unique_events}
+
+    error_margin = cms1.calculate_error_margin()
+
+    print("Estimated Event Frequencies:")
+    print(event_frequencies)
+    print(f"Error Margin: ±{error_margin:.2f}")
+
+    frequencies = sorted(event_frequencies.values())
+    percentile_90 = calculate_percentile(90, frequencies)
+    median = calculate_percentile(50, frequencies)
+
+    print(f"90th Percentile Frequency: {percentile_90}")
+    print(f"Median Frequency: {median}")

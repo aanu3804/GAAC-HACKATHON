@@ -17,7 +17,7 @@ On a scale of 1-10, how excited are you about this hackathon?
 - We're taking up the DSA/CS theme because we am passionate about building a strong foundation in computer science and problem-solving. Mastering Data Structures and Algorithms helps tackle real-world challenges efficiently in fields like software development, robotics, artificial intelligence, and system design. It’s a theme that pushes us to continuously improve my analytical thinking, optimize solutions, and stay prepared for complex technical challenges.
 
 ## Expectations 
-- What are you hoping to achieve or learn from this hackathon?
+What are you hoping to achieve or learn from this hackathon?
 Learnings?
 - I aim to enhance my DSA skills by solving real-world problems efficiently during this hackathon. My goal is to design optimized solutions, strengthen problem-solving abilities, and collaborate with like-minded peers. I also hope to gain practical experience and contribute to creating impactful and innovative projects.
 

@@ -1,43 +1,117 @@
-# GAAC-HACKATHON
-## Team Introduction
-## Team Members:-
-- Member 1:- Anand Sai Lattala
-- Member 2:- Nandan Chilukuri
-## E-mail Address 
-- Member 1- anandsai2004@gmail.com 
-- Member 2- nandanchilukuri5@gmail.com
-## LinkedIn 
-- Member 1:- [https://www.linkedin.com/in/anand-sai-lattala-b2238b260]
-- Member 2:- [https://www.linkedin.com/in/nandan-chilukuri-6a3869328?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app]
-## GitHub Connection :- Yes
-## Excitement Level
-On a scale of 1-10, how excited are you about this hackathon?
-- 10
-## Theme Selection
-- We're taking up the DSA/CS theme because we am passionate about building a strong foundation in computer science and problem-solving. Mastering Data Structures and Algorithms helps tackle real-world challenges efficiently in fields like software development, robotics, artificial intelligence, and system design. It’s a theme that pushes us to continuously improve my analytical thinking, optimize solutions, and stay prepared for complex technical challenges.
-
-## Expectations 
-What are you hoping to achieve or learn from this hackathon?
-Learnings?
-- I aim to enhance my DSA skills by solving real-world problems efficiently during this hackathon. My goal is to design optimized solutions, strengthen problem-solving abilities, and collaborate with like-minded peers. I also hope to gain practical experience and contribute to creating impactful and innovative projects.
-
-What are the strengths of your team?
-
-- Our team excels in DSA, problem-solving, and collaboration. With diverse skills, coding efficiency, and adaptability, we ensure innovative solutions while managing challenges effectively and delivering results on time.
-
-
-What tools, frameworks, or technologies will you use?
-Tools/Technologies:
- - Programming Languages: C, Java and  Python
- - IDEs: Visual Studio Code.
- - Technologies: Git, Debugging Tools
- - Frameworks: Focused on core Data structures  Algorithms 
-
-What’s a fun fact about your team?
-- A fun fact about our team is that we bond over solving complex coding problems, often turning them into friendly competitions to see who can come up with the most optimized solution first!
+# 
+## Problem Statement
+**Probabilistic Data Structure for Real-Time Event Tracking**<br />
+Design a probabilistic data structure that tracks the frequency of millions of real-time events with minimal memory and supports accurate percentile queries.<br />
+Constraints:
+- Achieve sub-linear space complexity while maintaining a low error margin.
+- Support mergeable properties for distributed environments.
 
 
 
 
+## **Solution Overview**
+
+Our approach involves designing a memory-efficient probabilistic data structure that can:  
+1. Track the frequency of millions of real-time events with sub-linear memory usage.  
+2. Provide percentile-based insights, such as median or 90th percentile queries, with high accuracy.  
+3. Operate seamlessly in distributed systems by supporting mergeable properties.
+
+### **Core Idea**  
+We utilize **count-min sketches** or **approximate quantile algorithms** to store frequency data compactly. These data structures maintain an acceptable error margin while requiring significantly less memory than traditional solutions.  
+By merging multiple instances of the structure, we enable scalable tracking across distributed nodes, addressing real-world constraints in handling large-scale event data.
+
+---
+
+## **Tech Stack**
+
+- **Python**: Core programming language for implementing the algorithm.  
+- **NumPy**: For efficient numerical operations and array management.  
+- **Flask/FastAPI**: To expose the solution as a REST API for real-time data ingestion and querying.  
+- **Docker**: For containerizing the application and ensuring portability across environments.  
+- **AWS Lambda**: For scalable and serverless deployment.  
+- **GitHub Actions**: To automate testing and CI/CD pipelines.
+
+### **Why These Technologies?**  
+- **Python** provides a rich ecosystem for numerical and algorithmic development.  
+- **NumPy** ensures computational efficiency for large datasets.  
+- **Flask** simplifies exposing functionalities as APIs, enabling integrations with other systems.  
+
+
+---
+
+## **Implementation Plan**
+
+### **Phase 1: Research and Design**  
+- Study probabilistic data structures like count-min sketches and quantile summaries.  
+- Define key performance metrics (error margin, mergeability, etc.).
+
+
+### **Phase 2: Core Algorithm Implementation**
+
+In this phase, we implemented two key algorithms to ensure memory-efficient event tracking and accurate percentile queries:
+
+1. **Count-Min Sketch (CMS)**:  
+   - A probabilistic data structure used to estimate the frequency of events with sub-linear memory requirements.  
+   - Provides high accuracy with configurable error margins.
+
+2. **Approximate Quantile Algorithm**:  
+   - Tracks approximate ranks and percentiles of events.  
+   - Facilitates insights such as medians and other percentile-based queries.  
+
+These algorithms form the backbone of our solution, ensuring scalability and efficiency in handling real-time event data
+
+
+
+### **Phase 3: Testing and Optimization**  
+- Conduct rigorous testing with synthetic and real-world event datasets.  
+- Optimize memory and response times for large-scale scenarios.  
+
+
+
+---
+
+## **Expected Outcome**
+
+By the end of this project, we aim to achieve:  
+- A highly memory-efficient data structure capable of tracking real-time events.  
+- Accurate percentile queries (e.g., medians) with minimal computation overhead.  
+- A scalable solution suitable for distributed environments.  
+- Real-world applicability in scenarios like analytics, telemetry, and monitoring systems.  
+
+**Potential Benefits:**  
+- Reduced infrastructure costs due to sub-linear memory requirements.  
+- Faster insights into event frequency trends, aiding in decision-making.  
+- Seamless integration into existing systems via RESTful APIs.
+
+
+
+
+### **Challenges**
+
+While developing this solution, we anticipate the following challenges and have outlined strategies to tackle them:
+
+#### **1. Memory Efficiency and Error Margin**
+- **Challenge**: Ensuring that the data structures, like Count-Min Sketch and Approximate Quantile, maintain low error margins while using minimal memory, especially when scaling up to millions of events.
+- **Solution**: We will optimize the parameters of the data structures (e.g., width and depth for Count-Min Sketch) and perform extensive testing to tune these parameters for the best trade-off between memory usage and accuracy.
+
+#### **2. Scalability in Distributed Systems**
+- **Challenge**: Merging data structures from distributed nodes while ensuring that the overall solution scales efficiently and maintains accuracy.
+- **Solution**: We will design mergeable data structures that can easily combine data from different sources. To manage scalability, we will use a distributed framework (e.g., Kafka, AWS Lambda) to ensure seamless merging and minimize communication overhead.
+
+#### **3. Real-Time Data Processing**
+- **Challenge**: Handling real-time event ingestion and query processing without introducing significant latency.
+- **Solution**: We will implement efficient algorithms for real-time data processing and use techniques like batching and windowing to process events in manageable chunks.
+
+#### **4. Integration with External Systems**
+- **Challenge**: Integrating the solution with external systems, especially when handling different data formats and protocols.
+- **Solution**: If APIs are implemented, we will standardize input/output formats (e.g., JSON) and provide clear documentation for integration with other systems.
+
+#### **5. Testing with Large-Scale Datasets**
+- **Challenge**: Testing the solution with large datasets that mimic real-world conditions can be difficult, particularly when dealing with millions of events.
+- **Solution**: We will create synthetic datasets for testing and use cloud services to simulate large-scale data environments. Performance testing tools will be used to assess the system’s efficiency.
+
+#### **6. Deployment and Continuous Integration**
+- **Challenge**: Ensuring smooth deployment across different environments and automating testing and deployment processes.
+- **Solution**: We will use Docker for consistent deployment and GitHub Actions for automating testing, code reviews, and CI/CD pipelines to maintain a smooth workflow across different stages of development.
 
 

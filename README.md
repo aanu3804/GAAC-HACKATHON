@@ -110,8 +110,4 @@ While developing this solution, we anticipate the following challenges and have 
 - **Challenge**: Testing the solution with large datasets that mimic real-world conditions can be difficult, particularly when dealing with millions of events.
 - **Solution**: We will create synthetic datasets for testing and use cloud services to simulate large-scale data environments. Performance testing tools will be used to assess the system’s efficiency.
 
-#### **6. Deployment and Continuous Integration**
-- **Challenge**: Ensuring smooth deployment across different environments and automating testing and deployment processes.
-- **Solution**: We will use Docker for consistent deployment and GitHub Actions for automating testing, code reviews, and CI/CD pipelines to maintain a smooth workflow across different stages of development.
-
 

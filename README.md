@@ -20,7 +20,24 @@ On a scale of 1-10, how excited are you about this hackathon?
 What are you hoping to achieve or learn from this hackathon?
 Learnings?
 - I aim to enhance my DSA skills by solving real-world problems efficiently during this hackathon. My goal is to design optimized solutions, strengthen problem-solving abilities, and collaborate with like-minded peers. I also hope to gain practical experience and contribute to creating impactful and innovative projects.
-* What are the strengths of your team?
+
+What are the strengths of your team?
+
+- Our team excels in DSA, problem-solving, and collaboration. With diverse skills, coding efficiency, and adaptability, we ensure innovative solutions while managing challenges effectively and delivering results on time.
+
+
+What tools, frameworks, or technologies will you use?
+Tools/Technologies:
+ - Programming Languages: C, Java and  Python
+ - IDEs: Visual Studio Code.
+ - Technologies: Git, Debugging Tools
+ - Frameworks: Focused on core Data structures  Algorithms 
+
+What’s a fun fact about your team?
+- A fun fact about our team is that we bond over solving complex coding problems, often turning them into friendly competitions to see who can come up with the most optimized solution first!
+
+
+
 
 
 

@@ -20,5 +20,7 @@ On a scale of 1-10, how excited are you about this hackathon?
 What are you hoping to achieve or learn from this hackathon?
 Learnings?
 - I aim to enhance my DSA skills by solving real-world problems efficiently during this hackathon. My goal is to design optimized solutions, strengthen problem-solving abilities, and collaborate with like-minded peers. I also hope to gain practical experience and contribute to creating impactful and innovative projects.
+* What are the strengths of your team?
+
 
 

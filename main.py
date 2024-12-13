@@ -6,7 +6,7 @@ class CountMinSketch:
     def __init__(self, width, depth):
         self.width = width
         self.depth = depth
-   
+
         self.table = np.zeros((depth, width), dtype=int)
         self.total_count = 0  # Track total events
 
@@ -25,10 +25,10 @@ class CountMinSketch:
         return min(estimates)
 
     def merge(self, other):
-    
+
         if self.width != other.width or self.depth != other.depth:
             raise ValueError("Dimensions of Count-Min Sketches must match for merging.")
-        
+
         self.table += other.table
         self.total_count += other.total_count
 
@@ -48,8 +48,8 @@ def calculate_percentile(percentile, data):
 # Main function to demonstrate functionality
 if __name__ == "__main__":
 
-    cms1 = CountMinSketch(width=10000, depth=10)  # Larger width for reduced error margin
-    cms2 = CountMinSketch(width=10000, depth=10)
+    cms1 = CountMinSketch(width=100000, depth=10)  # Larger width for reduced error margin
+    cms2 = CountMinSketch(width=100000, depth=10)
 
     events1 = generate_random_events(500000)
     events2 = generate_random_events(500000)

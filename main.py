@@ -1,17 +1,18 @@
-import hashlib
 import numpy as np
+import mmh3  # MurmurHash for independent hash functions
 import random
 
-class CountMinSketch:
-    def __init__(self, width, depth):
+class EnhancedCountMinSketch:
+    def __init__(self, width, depth, seeds):
         self.width = width
         self.depth = depth
-
+        self.seeds = seeds  # Independent seeds for MurmurHash
         self.table = np.zeros((depth, width), dtype=int)
         self.total_count = 0  # Track total events
 
     def hash(self, item, i):
-        return int(hashlib.md5(f"{item}{i}".encode('utf-8')).hexdigest(), 16) % self.width
+        # Use MurmurHash with independent seeds
+        return mmh3.hash(item, self.seeds[i]) % self.width
 
     def add(self, item):
         for i in range(self.depth):
@@ -20,15 +21,12 @@ class CountMinSketch:
         self.total_count += 1
 
     def estimate(self, item):
-
         estimates = [self.table[i][self.hash(item, i)] for i in range(self.depth)]
         return min(estimates)
 
     def merge(self, other):
-
         if self.width != other.width or self.depth != other.depth:
             raise ValueError("Dimensions of Count-Min Sketches must match for merging.")
-
         self.table += other.table
         self.total_count += other.total_count
 
@@ -45,11 +43,10 @@ def calculate_percentile(percentile, data):
     index = int(np.ceil((percentile / 100) * len(data))) - 1
     return data[index]
 
-# Main function to demonstrate functionality
 if __name__ == "__main__":
-
-    cms1 = CountMinSketch(width=100000, depth=10)  # Larger width for reduced error margin
-    cms2 = CountMinSketch(width=100000, depth=10)
+    seeds = [13, 29, 47, 59, 71, 89, 101, 113, 131, 151]  # Independent seeds
+    cms1 = EnhancedCountMinSketch(width=10**8, depth=10, seeds=seeds)  # Increased width
+    cms2 = EnhancedCountMinSketch(width=10**8, depth=10, seeds=seeds)
 
     events1 = generate_random_events(500000)
     events2 = generate_random_events(500000)
@@ -69,7 +66,7 @@ if __name__ == "__main__":
 
     print("Estimated Event Frequencies:")
     print(event_frequencies)
-    print(f"Error Margin: ±{error_margin:.2f}")
+    print(f"Error Margin: ±{error_margin:.2f}%")
 
     frequencies = sorted(event_frequencies.values())
     percentile_90 = calculate_percentile(90, frequencies)

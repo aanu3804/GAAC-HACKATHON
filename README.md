@@ -40,12 +40,11 @@ We utilize **Count-Min Sketch (CMS)** to store frequency data compactly. These d
 ## Implementation Plan
 
 ### **Phase 1: Research and Design**
-- Study probabilistic data structures like Count-Min Sketch and quantile summaries.
-- Define key performance metrics (e.g., error margin, mergeability).
+- Resaerched about probabilistic data structures like Count-Min Sketch and quantile summaries
 
 ### **Phase 2: Core Algorithm Implementation**
 1. **Count-Min Sketch (CMS):**
-   - Probabilistic data structure to estimate the frequency of events with sub-linear memory.
+   - Selected Probabilistic data structure to estimate the frequency of events with sub-linear memory.
    - Configurable error margins to ensure high accuracy.
 
 2. **Percentile Calculation:**
@@ -63,10 +62,6 @@ We utilize **Count-Min Sketch (CMS)** to store frequency data compactly. These d
 - Accurate percentile queries (e.g., medians) with minimal computation overhead.
 - A scalable solution suitable for distributed environments.
 
-### Potential Benefits:
-- Reduced infrastructure costs due to sub-linear memory requirements.
-- Faster insights into event frequency trends, aiding in decision-making.
-- Seamless integration into existing systems via RESTful APIs.
 
 ---
 
@@ -79,8 +74,6 @@ We utilize **Count-Min Sketch (CMS)** to store frequency data compactly. These d
 ### **2. Scalability in Distributed Systems**
 - **Challenge:** Merging CMS instances from distributed nodes while maintaining accuracy.
 - **Solution:** Design mergeable structures and use distributed frameworks (e.g., AWS Lambda) to minimize overhead.
-
-
 ---
 
 ## How to Run the Project
@@ -91,6 +84,10 @@ We utilize **Count-Min Sketch (CMS)** to store frequency data compactly. These d
 
 ```bash
 pip install numpy
+```
+-Install required library : `mmh3`
+```bash
+pip install mmh3
 ```
 
 ### **Steps:**
@@ -106,4 +103,7 @@ pip install numpy
 3. Observe outputs for estimated frequencies, error margins, and percentile queries.
 
 ---
+### *Sample Output*
+![image](https://github.com/user-attachments/assets/6dce5838-a0c1-4dea-b868-bb18fa5ac2ec)
 
+------------------------------- End Of the Document --------------------------------------------------
